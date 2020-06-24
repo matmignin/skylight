@@ -1,3 +1,4 @@
+@login_required
 #!/usr/bin/env python3
 from flask import (
     render_template,
@@ -57,12 +58,10 @@ def login():
                 files = os.listdir(upload_folder)
                 return render_template("gallery.html", files=files)
             else:
-                # db.session.rollback()
                 flash("not a correct password")
                 return redirect(url_for('signup'))
         else:
             flash("Thats not a user. Sign up")
-            # return render_template("signup.html", form=user)
             return redirect(url_for('signup'))
     return render_template("login.html", form=form)
 

@@ -88,17 +88,22 @@ img, svg {
 
 #footer-main {
   position: absolute;
-  padding: 1em;
-  bottom: 0;
+  bottom: 0em;
   left: 0;
   right: 0;
+  padding-bottom: 1rem;
+  padding-top: 3rem;
 }
 
 #page-top {
   background-color: #fed875;
-  padding-bottom: 0px;
 }
 
 section {
+}
+
+#midcontainer {
+  top: 12em;
+  bottom: 0em;
 }
 
