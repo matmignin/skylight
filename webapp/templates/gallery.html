@@ -53,7 +53,7 @@
         </div>
     </nav>
     <section style="background-color: #fed875;">
-        <div class="container text-center d-flex flex-column justify-content-center align-items-center align-items-lg-center"><div>
+        <div class="container text-center d-flex flex-column justify-content-center align-items-center align-items-lg-center" style="margin-bottom: -33px;padding-top: 50px;"><div>
 {% with messages = get_flashed_messages() %}
   {% if messages %}
     {% for message in messages %}
@@ -69,34 +69,64 @@
         <div class="container">
             <div class="text-left">
                 <ul class="nav nav-pills nav-fill">
-                    <li class="nav-item"><a class="nav-link active" role="tab" data-toggle="pill" href="#tab-1">Mat &amp; Rachaels</a></li>
+                    <li class="nav-item"><a class="nav-link" role="tab" data-toggle="pill" href="#tab-1">Mat &amp; Rachaels</a></li>
                     <li class="nav-item"><a class="nav-link" role="tab" data-toggle="pill" href="#tab-2">Mike &amp; Alyssa</a></li>
                     <li class="nav-item"><a class="nav-link" role="tab" data-toggle="pill" href="#tab-3">Christie &amp; Alex</a></li>
-                    <li class="nav-item"><a class="nav-link" role="tab" data-toggle="pill" href="#tab-3">Toney and Heather</a></li>
+                    <li class="nav-item"><a class="nav-link active" role="tab" data-toggle="pill" href="#tab-4">Tony and Heather</a></li>
                 </ul>
                 <div class="tab-content">
-                    <div class="tab-pane fade show active" role="tabpanel" id="tab-1"><div class="container">
+                    <div class="tab-pane fade" role="tabpanel" id="tab-1"><div class="container">
 		<div class="row">
-		{% for file in files %}
+		{% for file in mat_files %}
 			<div class="col-lg-3 col-md-4">
 				<div class="text-center">
-					{{file}}
+					{{ file }}
 				</div>
-				<img class="img-thumbnail" src="{{url_for('send_image', filename=file)}}">
+				<img class="img-thumbnail" src="{{ url_for('send_image', filename=file) }}">
 			</div>
 		{% endfor %}
 		</div>
 </div>
 </div>
-                    <div class="tab-pane fade" role="tabpanel" id="tab-2">
-                        <p>Content for tab 2.</p>
-                    </div>
-                    <div class="tab-pane fade" role="tabpanel" id="tab-3">
-                        <p>Content for tab 3.</p>
-                    </div>
-                    <div class="tab-pane fade" role="tabpanel" id="tab-4">
-                        <p>Content for tab 3.</p>
-                    </div>
+                    <div class="tab-pane fade" role="tabpanel" id="tab-2"><div class="container">
+		<div class="row">
+		{% for file in mike_files %}
+			<div class="col-lg-3 col-md-4">
+				<div class="text-center">
+					{{ file }}
+				</div>
+				<img class="img-thumbnail" src="{{ url_for('send_image', filename=file) }}">
+			</div>
+		{% endfor %}
+		</div>
+</div>
+</div>
+                    <div class="tab-pane fade" role="tabpanel" id="tab-3"><div class="container">
+		<div class="row">
+		{% for file in christie_files %}
+			<div class="col-lg-3 col-md-4">
+				<div class="text-center">
+					{{ file }}
+				</div>
+				<img class="img-thumbnail" src="{{ url_for('send_image', filename=file) }}">
+			</div>
+		{% endfor %}
+		</div>
+</div>
+</div>
+                    <div class="tab-pane fade show active" role="tabpanel" id="tab-4"><div class="container">
+		<div class="row">
+		{% for file in tony_files %}
+			<div class="col-lg-3 col-md-4">
+				<div class="text-center">
+					{{ file }}
+				</div>
+				<img class="img-thumbnail" src="{{ url_for('send_image', filename=file) }}">
+			</div>
+		{% endfor %}
+		</div>
+</div>
+</div>
                 </div>
             </div>
         </div>

@@ -76,6 +76,7 @@ def logout():
 @login_required
 def upload():
     user_folder = os.path.join(upload_folder, str(current_user.username))
+    temp_folder = os.path.join(upload_folder, "que")
     if request.method == "POST":
         if request.files:
             input = request.files["form_upload"]
@@ -85,18 +86,26 @@ def upload():
             else:
                 for upload in request.files.getlist("form_upload"):
                     upload.save(os.path.join(user_folder, upload.filename))
-    files = os.listdir(upload_folder)
-    return render_template("upload.html", files=files)
+                    upload.save(os.path.join(temp_folder, upload.filename))
+                    flash("added to que") 
+    files = os.listdir(temp_folder)
+    return render_template("upload.html", files=files, temp_folder=temp_folder)
 
 
 @app.route('/gallery', methods=["GET", "POST"])
-# @login_required
 def gallery():
-    files = os.listdir(upload_folder)
-    return render_template("gallery.html", files=files)
+    mat_files = os.listdir(os.path.join(upload_folder, "mat"))
+    mike_files = os.listdir(os.path.join(upload_folder, "mike"))
+    christie_files = os.listdir(os.path.join(upload_folder, "christie"))
+    tony_files = os.listdir(os.path.join(upload_folder, "tony"))
+    return render_template("gallery.html",
+                           mat_files=mat_files,
+                           mike_files=mike_files,
+                           christie_files=christie_files,
+                           tony_files=tony_files)
 
 
 @app.route("/gallery/<filename>")
 @login_required
 def send_image(filename):
-    return send_from_directory(upload_folder, filename)
+    return send_from_directory(os.path.join(upload_folder, str(current_user.username)), filename)
