@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="static/css/Body-Section.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
     <link rel="stylesheet" href="static/css/main.css">
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
@@ -66,16 +67,12 @@
 </div>
     </section>
     <section style="background-color: #ce8481;">
-        <div class="container">
-            <div class="text-left">
-                <ul class="nav nav-pills nav-fill">
-                    <li class="nav-item"><a class="nav-link" role="tab" data-toggle="pill" href="#tab-1">Mat &amp; Rachaels</a></li>
-                    <li class="nav-item"><a class="nav-link" role="tab" data-toggle="pill" href="#tab-2">Mike &amp; Alyssa</a></li>
-                    <li class="nav-item"><a class="nav-link" role="tab" data-toggle="pill" href="#tab-3">Christie &amp; Alex</a></li>
-                    <li class="nav-item"><a class="nav-link active" role="tab" data-toggle="pill" href="#tab-4">Tony and Heather</a></li>
-                </ul>
-                <div class="tab-content">
-                    <div class="tab-pane fade" role="tabpanel" id="tab-1"><div class="container">
+        <div class="container-fluid">
+            <div class="carousel slide" data-ride="carousel" data-interval="3000" data-toggle="tooltip" data-bs-tooltip="" id="carousel-1">
+                <div class="carousel-inner" role="listbox">
+                    <div class="carousel-item active">
+                        <h1 class="text-center" id="gallery_head-3" style="color: #fed875;">Mat &amp; Rachael</h1>
+                        <section><div class="container">
 		<div class="row">
 		{% for file in mat_files %}
 			<div class="col-lg-3 col-md-4">
@@ -87,8 +84,11 @@
 		{% endfor %}
 		</div>
 </div>
-</div>
-                    <div class="tab-pane fade" role="tabpanel" id="tab-2"><div class="container">
+</section>
+                    </div>
+                    <div class="carousel-item">
+                        <h1 class="text-center" id="gallery_head-1" style="color: #fed875;">Mike &amp; Alyssa</h1>
+                        <section><div class="container">
 		<div class="row">
 		{% for file in mike_files %}
 			<div class="col-lg-3 col-md-4">
@@ -100,8 +100,11 @@
 		{% endfor %}
 		</div>
 </div>
-</div>
-                    <div class="tab-pane fade" role="tabpanel" id="tab-3"><div class="container">
+</section>
+                    </div>
+                    <div class="carousel-item">
+                        <h1 class="text-center" id="gallery_head" style="color: #fed875;">Christie &amp; Alex</h1>
+                        <section><div class="container">
 		<div class="row">
 		{% for file in christie_files %}
 			<div class="col-lg-3 col-md-4">
@@ -113,8 +116,11 @@
 		{% endfor %}
 		</div>
 </div>
-</div>
-                    <div class="tab-pane fade show active" role="tabpanel" id="tab-4"><div class="container">
+</section>
+                    </div>
+                    <div class="carousel-item">
+                        <h1 class="text-center" id="gallery_head-2" style="color: #fed875;">Tony &amp; Heather</h1>
+                        <section><div class="container">
 		<div class="row">
 		{% for file in tony_files %}
 			<div class="col-lg-3 col-md-4">
@@ -126,8 +132,17 @@
 		{% endfor %}
 		</div>
 </div>
-</div>
+</section>
+                    </div>
                 </div>
+                <div><a class="carousel-control-prev" href="#carousel-1" role="button" data-slide="prev"><span class="carousel-control-prev-icon"></span><span class="sr-only">Previous</span></a><a class="carousel-control-next" href="#carousel-1" role="button"
+                        data-slide="next"><span class="carousel-control-next-icon"></span><span class="sr-only">Next</span></a></div>
+                <ol class="carousel-indicators" title="Mat">
+                    <li data-target="#carousel-1" data-slide-to="0" class="active"></li>
+                    <li data-target="#carousel-1" data-slide-to="1"></li>
+                    <li data-target="#carousel-1" data-slide-to="2"></li>
+                    <li data-target="#carousel-1" data-slide-to="3"></li>
+                </ol>
             </div>
         </div>
     </section>
@@ -151,6 +166,7 @@
     </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="static/js/bs-init.js"></script>
     <script src="static/js/freelancer.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>
 </body>
