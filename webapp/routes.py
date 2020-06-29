@@ -1,4 +1,3 @@
-@login_required
 #!/usr/bin/env python3
 from flask import (
     render_template,
@@ -73,18 +72,26 @@ def logout():
     return redirect(url_for('index'))
 
 
-@app.route('/gallery', methods=["GET", "POST"])
+@app.route('/upload', methods=["GET", "POST"])
 @login_required
 def upload():
+    user_folder = os.path.join(upload_folder, str(current_user.username))
     if request.method == "POST":
         if request.files:
-            input = request.files["inputFile"]
+            input = request.files["form_upload"]
             if input.filename == "":
                 flash("no file selected")
                 return redirect(request.url)
             else:
-                for upload in request.files.getlist("inputFile"):
-                    upload.save(os.path.join(upload_folder, upload.filename))
+                for upload in request.files.getlist("form_upload"):
+                    upload.save(os.path.join(user_folder, upload.filename))
+    files = os.listdir(upload_folder)
+    return render_template("upload.html", files=files)
+
+
+@app.route('/gallery', methods=["GET", "POST"])
+# @login_required
+def gallery():
     files = os.listdir(upload_folder)
     return render_template("gallery.html", files=files)
 

@@ -13,9 +13,6 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(15), unique=True, nullable=False)
     password = db.Column(db.String(80), nullable=False)
 
-    # def __repr__(self):
-        # return """ User('(self.username)') """
-
 
 class FileContents(db.Model):
     id = db.Column(db.Integer, primary_key=True)

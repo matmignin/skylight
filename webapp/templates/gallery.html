@@ -35,6 +35,9 @@
                 <ul class="nav navbar-nav d-xl-flex align-items-center ml-auto align-items-xl-center" style="color: rgb(255,255,255);">
                     <li class="nav-item d-xl-flex justify-content-xl-end align-items-xl-center" role="presentation" style="padding-right: 10px;padding-left: 10px;"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="gallery" style="color: rgba(255,255,255,0.5);">gallery</a></li>
                     <li class="nav-item align-items-xl-center mx-0 mx-lg-1" role="presentation" style="padding-left: 10px;padding-right: 10px;font-size: 5px;">{% if current_user.is_authenticated %}
+ <li class="nav-item mx-0 mx-lg-1" role="presentation" style="padding-right: 10px;">
+    <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="upload" style="color: rgba(255,255,255,0.5);">Upload</a>
+  </li>
   <li class="nav-item dropdown mx-0 mx-lg-1">
       <a class="dropdown-toggle nav-link mx-0 mx-lg-1" data-toggle="dropdown" aria-expanded="false" href="#">{{  current_user.username }} </a>
       <div role="menu" class="dropdown-menu hide"><a role="presentation" class="dropdown-item" href="logout">Logout</a></div>
@@ -60,19 +63,19 @@
 {% endwith %}
 
 </div>
-<div class ="container d-flex align-items-center flex-column justify-content-center text-center">
-    <h1>UPLOAD Photos</h1>
-    <form  class="container d-flex justify-content-center align-items-center text-center" method="POST" action="/gallery" enctype="multipart/form-data">
-      <div class="form-group">
-        <input type="file" name="inputFile" accept="image/*" multiple>
-        <input type=submit>
-      </div>
-    </form>
-</div>
 </div>
     </section>
     <section style="background-color: #ce8481;">
-        <div class="container"><div class="container">
+        <div class="container">
+            <div class="text-left">
+                <ul class="nav nav-pills nav-fill">
+                    <li class="nav-item"><a class="nav-link active" role="tab" data-toggle="pill" href="#tab-1">Mat &amp; Rachaels</a></li>
+                    <li class="nav-item"><a class="nav-link" role="tab" data-toggle="pill" href="#tab-2">Mike &amp; Alyssa</a></li>
+                    <li class="nav-item"><a class="nav-link" role="tab" data-toggle="pill" href="#tab-3">Christie &amp; Alex</a></li>
+                    <li class="nav-item"><a class="nav-link" role="tab" data-toggle="pill" href="#tab-3">Toney and Heather</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" role="tabpanel" id="tab-1"><div class="container">
 		<div class="row">
 		{% for file in files %}
 			<div class="col-lg-3 col-md-4">
@@ -85,6 +88,18 @@
 		</div>
 </div>
 </div>
+                    <div class="tab-pane fade" role="tabpanel" id="tab-2">
+                        <p>Content for tab 2.</p>
+                    </div>
+                    <div class="tab-pane fade" role="tabpanel" id="tab-3">
+                        <p>Content for tab 3.</p>
+                    </div>
+                    <div class="tab-pane fade" role="tabpanel" id="tab-4">
+                        <p>Content for tab 3.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
     <footer id="footer-main" class="footer text-center">
         <div class="container">

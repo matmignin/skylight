@@ -36,6 +36,9 @@
                     <ul class="nav navbar-nav d-xl-flex align-items-center ml-auto align-items-xl-center" style="color: rgb(255,255,255);">
                         <li class="nav-item d-xl-flex justify-content-xl-end align-items-xl-center" role="presentation" style="padding-right: 10px;padding-left: 10px;"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="gallery" style="color: rgba(255,255,255,0.5);">gallery</a></li>
                         <li class="nav-item align-items-xl-center mx-0 mx-lg-1" role="presentation" style="padding-left: 10px;padding-right: 10px;font-size: 5px;">{% if current_user.is_authenticated %}
+ <li class="nav-item mx-0 mx-lg-1" role="presentation" style="padding-right: 10px;">
+    <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="upload" style="color: rgba(255,255,255,0.5);">Upload</a>
+  </li>
   <li class="nav-item dropdown mx-0 mx-lg-1">
       <a class="dropdown-toggle nav-link mx-0 mx-lg-1" data-toggle="dropdown" aria-expanded="false" href="#">{{  current_user.username }} </a>
       <div role="menu" class="dropdown-menu hide"><a role="presentation" class="dropdown-item" href="logout">Logout</a></div>
