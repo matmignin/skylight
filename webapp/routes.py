@@ -76,7 +76,7 @@ def logout():
 @login_required
 def upload():
     user_folder = os.path.join(upload_folder, str(current_user.username))
-    temp_folder = os.path.join(upload_folder, "que")
+    # temp_folder = os.path.join(upload_folder, "que")
     if request.method == "POST":
         if request.files:
             input = request.files["form_upload"]
@@ -86,10 +86,9 @@ def upload():
             else:
                 for upload in request.files.getlist("form_upload"):
                     upload.save(os.path.join(user_folder, upload.filename))
-                    upload.save(os.path.join(temp_folder, upload.filename))
-                    flash("added to que") 
-    files = os.listdir(temp_folder)
-    return render_template("upload.html", files=files, temp_folder=temp_folder)
+                    flash(f"{upload.filename} uploaded") 
+    files = os.listdir(user_folder)
+    return render_template("upload.html", files=files)
 
 
 @app.route('/gallery', methods=["GET", "POST"])

@@ -63,7 +63,10 @@
 {% endwith %}
 
 </div>
-<div class ="container d-flex align-items-center flex-column justify-content-center text-center">
+</div>
+    </section>
+    <section style="background-color: #ce8481;">
+        <div class="container"><div class ="container d-flex align-items-center flex-column justify-content-center text-center">
     <h1 class="text-uppercase"> {{ current_user.username }}'s Photos</h1>
     <form  class="container d-flex justify-content-center align-items-center text-center" method="POST" action="/upload" enctype="multipart/form-data">
       <div class="form-group">
@@ -72,10 +75,7 @@
       </div>
     </form>
 </div>
-</div>
-    </section>
-    <section style="background-color: #ce8481;">
-        <div class="container"><div class="container">
+<div class="container">
 		<div class="row">
 		{% for file in files %}
 			<div class="col-lg-3 col-md-4">
