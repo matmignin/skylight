@@ -7,6 +7,9 @@
 .Ulysses-Group.plist
 *.swo
 .bsdesign
+terraform/.terraform/*
+Terraform/.terraform/*
+*.tfstate*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

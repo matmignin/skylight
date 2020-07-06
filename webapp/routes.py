@@ -9,11 +9,12 @@ from flask import (
     send_from_directory,
 )
 import os
-from webapp import app, db, bcrypt
+from webapp import app, db, bcrypt, mail
 from webapp.forms import RegisterForm, LoginForm
 from webapp.models import User
 from flask_login import login_user, current_user, logout_user, login_required
 from sqlalchemy.exc import IntegrityError
+from flask_mail import Message
 
 upload_folder = app.config["UPLOAD_FOLDER"]
 
@@ -53,9 +54,8 @@ def login():
         if user:
             if bcrypt.check_password_hash(user.password, form.password.data):
                 login_user(user)
-                flash("Youre logged in!", "success")
-                files = os.listdir(upload_folder)
-                return render_template("gallery.html", files=files)
+                flash(f"{user.username} is logged in!", "success")
+                return redirect(url_for('upload'))
             else:
                 flash("not a correct password")
                 return redirect(url_for('signup'))
@@ -76,17 +76,23 @@ def logout():
 @login_required
 def upload():
     user_folder = os.path.join(upload_folder, str(current_user.username))
-    # temp_folder = os.path.join(upload_folder, "que")
     if request.method == "POST":
         if request.files:
             input = request.files["form_upload"]
             if input.filename == "":
                 flash("no file selected")
                 return redirect(request.url)
+
             else:
                 for upload in request.files.getlist("form_upload"):
                     upload.save(os.path.join(user_folder, upload.filename))
                     flash(f"{upload.filename} uploaded") 
+                    msg = Message('test subject', recipients=['mat@mignin.com'])
+                    # msg.body = upload
+                    # msg.html = '<h1>HTML body</h1>'
+                    with app.open_resource(os.path.join(user_folder, upload.filename)) as fp:
+                        msg.attach(f'{upload.filename}', 'image/*', fp.read())
+                    mail.send(msg)
     files = os.listdir(user_folder)
     return render_template("upload.html", files=files)
 
@@ -105,6 +111,6 @@ def gallery():
 
 
 @app.route("/gallery/<filename>")
-@login_required
 def send_image(filename):
-    return send_from_directory(os.path.join(upload_folder, str(current_user.username)), filename)
+    user_folder = os.path.join(upload_folder, str(current_user.username))
+    return send_from_directory(user_folder, filename)

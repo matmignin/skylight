@@ -78,3 +78,9 @@ wrapt==1.12.1
 WTForms==2.3.1
 yapf==0.30.0
 zipp==3.1.0
+ansible
+boto
+boto3
+paramiko
+PyYAML
+httplib2
