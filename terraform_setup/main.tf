@@ -20,7 +20,9 @@ resource "aws_instance" "skylight_instance" {
       host = self.public_ip
     }
   }
-
+  tags = {
+    name = "skylight-tag"
+  }
 }
 
 resource "aws_security_group" "skylight_sg" {
