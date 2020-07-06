@@ -1,18 +1,18 @@
 provider "aws" {
   profile = "default"
-  region  = "us-east-1"
+  region  = var.region
 }
 
 resource "aws_instance" "skylight_instance" {
-  ami                    = "ami-2757f631"
-  instance_type          = "t2.micro"
-  key_name               = "skylight"
+  ami                    = var.ami_id
+  instance_type          = var.server_instance_type
+  key_name               = var.private_key
   vpc_security_group_ids = [aws_security_group.skylight_sg.id]
 
   provisioner "remote-exec" {
     inline = [
       "sudo apt-get -y update",
-      "sudo apt-get install -y python",
+      "sudo apt-get install -y python3",
     ]
     connection {
       type = "ssh"

@@ -1,11 +1,14 @@
-#variable "public_key_path" {
-#default     = "~/.ssh/aws-rsa.pub"
-#description = "public key path"
-#}
+variable "public_key_path" {
+  default = "us-east-1"
+}
 
-#variable "private_key" {
-#default = "~/.ssh/skylight.pem"
-#}
+variable "private_key" {
+  default = "skylight"
+}
+
+variable "ami_id" {
+  default = "ami-2757f631"
+}
 
 variable "server_instance_type" {
   default     = "t2.micro"
