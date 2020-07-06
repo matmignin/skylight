@@ -1,6 +1,5 @@
 provider "aws" {
   profile = "default"
-  region  = "us-east-1"
 }
 
 resource "aws_instance" "skylight_instance" {
@@ -8,21 +7,22 @@ resource "aws_instance" "skylight_instance" {
   instance_type = "t2.micro"
   key_name      = "skylight"
 
-  #provisioner "remote-exec" {
-  #inline = [
-  #"sudo apt-get -y update",
-  #"sudo apt-get install -y python",
-  #]
-  #connection {
-  #type = "ssh"
-  #user = "ubuntu"
-  #}
-  #}
+  provisioner "remote-exec" {
+    inline = [
+      "sudo apt-get -y update",
+      "sudo apt-get install -y python",
+    ]
+    connection {
+      type                   = "ssh"
+      user                   = "ubuntu"
+      vpc_security_group_ids = [aws_security_group.skylight_sg.id]
+    }
+  }
 
 }
 
-resource "aws_security_group" "skylight_elb" {
-  name = "skylight-elb"
+resource "aws_security_group" "skylight_sg" {
+  name = "skylight-sg"
 
   egress {
     from_port   = 0
@@ -54,32 +54,6 @@ resource "aws_security_group" "skylight_elb" {
   }
 }
 
-resource "aws_elb" "skylight_lb" {
-  name               = "skylight-lb"
-  availability_zones = ["us-east-1a", "us-east-1b", "us-east-1c"]
-  instances          = ["${aws_instance.skylight_instance.id}"]
-
-  health_check {
-    healthy_threshold   = 2
-    unhealthy_threshold = 2
-    timeout             = 3
-    interval            = 30
-    target              = "HTTP:80/"
-  }
-
-  listener {
-    instance_port     = 80
-    instance_protocol = "http"
-    lb_port           = 80
-    lb_protocol       = "http"
-  }
-
-  cross_zone_load_balancing   = true
-  idle_timeout                = 400
-  connection_draining         = true
-  connection_draining_timeout = 4
-}
-
 output "instance_ips" {
-  value = ["${aws_instance.skylight_instance.*.public_ip}"]
+  value = [aws_instance.skylight_instance.public_ip]
 }
