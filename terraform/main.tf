@@ -13,6 +13,7 @@ resource "aws_instance" "skylight_instance" {
     inline = [
       "sudo apt-get -y update",
       "sudo apt-get install -y python3",
+      "sudo apt-get install -y python3-pip",
     ]
     connection {
       type = "ssh"
