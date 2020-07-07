@@ -1,0 +1,7 @@
+webservers:
+  hosts:
+      skylight_servers:
+        ansible_connection: ssh
+        ansible_host: "3.85.136.35"
+        ansible_user: ubuntu
+        #ansible_password:

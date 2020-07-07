@@ -1,6 +1,6 @@
-variable "public_key_path" {
-  default = "us-east-1"
-}
+#variable "public_key_path" {
+#default = "us-east-1"
+#}
 
 variable "private_key" {
   default = "skylight"

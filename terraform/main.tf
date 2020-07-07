@@ -3,6 +3,7 @@ provider "aws" {
   region  = var.region
 }
 
+
 resource "aws_instance" "skylight_instance" {
   ami                    = var.ami_id
   instance_type          = var.server_instance_type
@@ -12,13 +13,17 @@ resource "aws_instance" "skylight_instance" {
   provisioner "remote-exec" {
     inline = [
       "sudo apt-get -y update",
-      "sudo apt-get install -y python3 python3-pip python3-venv git"
+      "sudo apt-get install -y python3 python3-pip python3-venv"
     ]
     connection {
       type = "ssh"
       user = "ubuntu"
       host = self.public_ip
     }
+  }
+
+  provisioner "local-exec" {
+    command = "sed -i '' -e '$ d' ../ansible/inventory/hosts; echo ${self.public_ip} >> ../ansible/inventory/hosts; ssh-add ~/.ssh/skylight"
   }
   tags = {
     name = "skylight-tag"
