@@ -23,7 +23,7 @@ resource "aws_instance" "skylight_instance" {
   }
 
   provisioner "local-exec" {
-    command = "sed -i '' -e '$ d' ../ansible/inventory/hosts; echo ${self.public_ip} >> ../ansible/inventory/hosts; ssh-add ~/.ssh/skylight"
+    command = "sed -i '' -e '$ d' ../ansible/inventory/hosts; echo ${self.public_ip} >> ../ansible/inventory/hosts; export AWSSH=${self.public_ip}"
   }
   tags = {
     name = "skylight-tag"
