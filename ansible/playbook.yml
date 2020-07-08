@@ -4,13 +4,21 @@
     - name: Clone repo
       git:
         repo: git@github.com:matmignin/skylight.git
-        dest: /home/ubuntu/
+        dest: /home/ubuntu/skylight
         accept_hostkey: yes
 
-    - name: copy systemd config file
-      copy: 
-        src: skylight.service
-        dest: /etc/systemd/skylight.service
+    - name: pip install requirements.txt
+      pip:
+        requirements: /home/ubuntu/skylight/requirements.txt
+        virtualenv: /home/ubuntu/skylight/skylightenv
+        virtualenv_command: skylightenv
+        virtualenv_site_packages: no
+        virtualenv_python: python3
+
+    #- name: copy systemd config file
+      #copy: 
+        #src: /home/ubuntu/skylight/ansible/skylight.service
+        #dest: /etc/systemd/skylight.service
         
     - name: Installs Nginx web server
       apt: 
@@ -55,6 +63,11 @@
         state: restarted
 
   handlers:
+    - name: start gunicorn
+      service:
+        name: gunicorn
+        state: started
+
     - name: start Nginx
       service:
         name: nginx 
