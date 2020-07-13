@@ -54,7 +54,7 @@ def login():
         if user:
             if bcrypt.check_password_hash(user.password, form.password.data):
                 login_user(user)
-                flash(f"{user.username} is logged in!", "success")
+                # flash(f"{user.username} is logged in!", "success")
                 return redirect(url_for('upload'))
             else:
                 flash("not a correct password")
