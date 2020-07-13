@@ -3,20 +3,20 @@
   become: yes
   become_method: sudo
   tasks:
-    - name: Clone repo
-      git:
-        repo: https://github.com/matmignin/skylight.git
-        dest: /home/ubuntu/skylight
-        accept_hostkey: yes
+    #- name: Clone repo
+      #git:
+        #repo: https://github.com/matmignin/skylight.git
+        #dest: /home/ubuntu/skylight
+        #accept_hostkey: yes
 
-    - name: pip install requirements.txt
-      pip:
-        requirements: /home/ubuntu/skylight/requirements.txt
-        virtualenv: /home/ubuntu/skylightenv
-        #virtualenv_command: python3 -m venv skylightenv
-        virtualenv_command: skylightenv
-        virtualenv_site_packages: no
-        virtualenv_python: python3
+    #- name: pip install requirements.txt
+      #pip:
+        #requirements: /home/ubuntu/skylight/requirements.txt
+        #virtualenv: /home/ubuntu/skylightenv
+        ##virtualenv_command: python3 -m venv skylightenv
+        #virtualenv_command: skylightenv
+        #virtualenv_site_packages: no
+        #virtualenv_python: python3
 
     #- name: Create a directory called images
       #file: 
@@ -70,8 +70,8 @@
 
   handlers:
     - name: start Nginx
-      become: yes
-      become_method: sudo
+      #become: yes
+      #become_method: sudo
       service:
         name: nginx 
         state: started
