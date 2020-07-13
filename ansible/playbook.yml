@@ -1,5 +1,7 @@
 ---
 - hosts: all
+  become: yes
+  become_method: sudo
   tasks:
     - name: Clone repo
       git:
@@ -10,10 +12,10 @@
     - name: pip install requirements.txt
       pip:
         requirements: /home/ubuntu/skylight/requirements.txt
-        virtualenv: /home/ubuntu/skylight/skylightenv
-        virtualenv_command: skylightenv
+        virtualenv: /home/ubuntu/skylight_env
+        virtualenv_command: python3 -m venv
         virtualenv_site_packages: no
-        virtualenv_python: python3
+        #virtualenv_python: python3
 
     #- name: copy systemd config file
       #copy: 
@@ -21,6 +23,8 @@
         #dest: /etc/systemd/skylight.service
         
     - name: Installs Nginx web server
+      become: yes
+      become_method: sudo
       apt: 
         pkg: nginx 
         state: present 
@@ -29,6 +33,7 @@
         - start nginx
 
     - name: copy nginx config file
+      become: yes
       copy: 
         src: nginx.conf 
         dest: /etc/nginx/sites-available/default
@@ -40,12 +45,14 @@
         state: link  
 
     - name: Upload default index.html for host
+      become: yes
       copy: 
         src: ../webapp/templates/index.html 
         dest: /usr/share/nginx/html/index.html 
         mode: 0644
 
     - name: Upload assets file
+      become: yes
       copy: 
         src: ../webapp/static
         dest: /usr/share/nginx/html/ 
@@ -58,15 +65,17 @@
         #mode: 0755
 
     - name: restart nginx
+      become: yes
+      become_method: sudo
       service: 
         name: nginx 
         state: restarted
 
   handlers:
-    - name: start gunicorn
-      service:
-        name: gunicorn
-        state: started
+    #- name: start gunicorn
+      #service:
+        #name: gunicorn
+        #state: started
 
     - name: start Nginx
       service:
