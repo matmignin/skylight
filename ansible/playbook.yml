@@ -12,10 +12,11 @@
     - name: pip install requirements.txt
       pip:
         requirements: /home/ubuntu/skylight/requirements.txt
-        virtualenv: /home/ubuntu/skylight/skylight_env
-        virtualenv_command: python3 -m venv
+        virtualenv: /home/ubuntu/skylightenv
+        #virtualenv_command: python3 -m venv skylightenv
+        virtualenv_command: skylightenv
         virtualenv_site_packages: no
-        #virtualenv_python: python3
+        virtualenv_python: python3
 
     #- name: Create a directory called images
       #file: 
@@ -49,12 +50,12 @@
         dest: /usr/share/nginx/html 
         mode: 0644
 
-    #- name: Upload assets file
-      #copy: 
-        #src: ../webapp/static
-        #dest: /usr/share/nginx/html/ 
-        #mode: 0644
-        #
+    - name: Upload assets file
+      copy: 
+        src: ../webapp/static
+        dest: /usr/share/nginx/html/ 
+        mode: 0644
+        
     - name: restart nginx
       service: 
         name: nginx 
@@ -69,6 +70,8 @@
 
   handlers:
     - name: start Nginx
+      become: yes
+      become_method: sudo
       service:
         name: nginx 
         state: started

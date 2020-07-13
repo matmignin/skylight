@@ -14,7 +14,7 @@ resource "aws_instance" "skylight_instance" {
     inline = [
       "sudo apt-get -y update",
       "sudo apt-get install -y python3 python3-pip python3-venv",
-      "python3 -m venv skylight_env"
+      "python3 -m venv skylightenv"
     ]
     connection {
       type = "ssh"
