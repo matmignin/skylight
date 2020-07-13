@@ -12,7 +12,7 @@
     - name: pip install requirements.txt
       pip:
         requirements: /home/ubuntu/skylight/requirements.txt
-        virtualenv: /home/ubuntu/skylight_env
+        virtualenv: /home/ubuntu/skylight/skylight_env
         virtualenv_command: python3 -m venv
         virtualenv_site_packages: no
         #virtualenv_python: python3
