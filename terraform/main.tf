@@ -14,8 +14,7 @@ resource "aws_instance" "skylight_instance" {
     inline = [
       "sudo apt-get -y update",
       "sudo apt-get install -y python3 python3-pip python3-venv",
-      "python3 -m venv skylight_env",
-      "export AWS_IP=$(echo ${self.public_ip})"
+      "python3 -m venv skylight_env"
     ]
     connection {
       type = "ssh"
@@ -25,7 +24,7 @@ resource "aws_instance" "skylight_instance" {
   }
 
   provisioner "local-exec" {
-    command = "sed -i '' -e '$ d' ../ansible/inventory/hosts; echo ${self.public_ip} >> ../ansible/inventory/hosts; export AWS_IP=$(echo ${self.public_ip})"
+    command = "sed -i '' -e '$ d' ../ansible/inventory/hosts; echo ${self.public_ip} >> ../ansible/inventory/hosts"
   }
   tags = {
     name = "skylight-tag"

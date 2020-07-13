@@ -5,7 +5,7 @@
   tasks:
     - name: Clone repo
       git:
-        repo: git@github.com:matmignin/skylight.git
+        repo: https://github.com/matmignin/skylight.git
         dest: /home/ubuntu/skylight
         accept_hostkey: yes
 
@@ -17,23 +17,22 @@
         virtualenv_site_packages: no
         #virtualenv_python: python3
 
-    #- name: copy systemd config file
-      #copy: 
-        #src: /home/ubuntu/skylight/ansible/skylight.service
-        #dest: /etc/systemd/skylight.service
+    #- name: Create a directory called images
+      #file: 
+        #path: /usr/share/nginx/html/images 
+        #state: directory 
+        #mode: 0755
+        #
         
     - name: Installs Nginx web server
-      become: yes
-      become_method: sudo
       apt: 
         pkg: nginx 
         state: present 
         update_cache: true
       notify:
-        - start nginx
+        - start Nginx
 
     - name: copy nginx config file
-      become: yes
       copy: 
         src: nginx.conf 
         dest: /etc/nginx/sites-available/default
@@ -45,18 +44,21 @@
         state: link  
 
     - name: Upload default index.html for host
-      become: yes
       copy: 
-        src: ../webapp/templates/index.html 
-        dest: /usr/share/nginx/html/index.html 
+        src: ../webapp/templates 
+        dest: /usr/share/nginx/html 
         mode: 0644
 
-    - name: Upload assets file
-      become: yes
-      copy: 
-        src: ../webapp/static
-        dest: /usr/share/nginx/html/ 
-        mode: 0644
+    #- name: Upload assets file
+      #copy: 
+        #src: ../webapp/static
+        #dest: /usr/share/nginx/html/ 
+        #mode: 0644
+        #
+    - name: restart nginx
+      service: 
+        name: nginx 
+        state: restarted
 
     #- name: Create a directory called images
       #file: 
@@ -64,19 +66,8 @@
         #state: directory 
         #mode: 0755
 
-    - name: restart nginx
-      become: yes
-      become_method: sudo
-      service: 
-        name: nginx 
-        state: restarted
 
   handlers:
-    #- name: start gunicorn
-      #service:
-        #name: gunicorn
-        #state: started
-
     - name: start Nginx
       service:
         name: nginx 
