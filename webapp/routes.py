@@ -17,8 +17,8 @@ from sqlalchemy.exc import IntegrityError
 from flask_mail import Message
 
 upload_folder = app.config["UPLOAD_FOLDER"]
-mat_folder = os.path.join(app.config["UPLOAD_FOLDER"], "mat")
-mike_folder = os.path.join(app.config["UPLOAD_FOLDER"], "mike")
+# mat_folder = os.path.join(app.config["UPLOAD_FOLDER"], "mat")
+# mike_folder = os.path.join(app.config["UPLOAD_FOLDER"], "mike")
 
 @app.route("/")
 @app.route("/index")
@@ -98,21 +98,11 @@ def upload():
 
 @app.route('/gallery', methods=["GET", "POST"])
 def get_gallery():
-    mat_folder = os.path.join(app.config["UPLOAD_FOLDER"], "mat")
-    mike_folder = os.path.join(app.config["UPLOAD_FOLDER"], "mike")
-    mat_files = os.listdir(mat_folder)
-    mike_files = os.listdir(mike_folder)
-    return render_template("gallery.html",
-                           mat_files=mat_files,
-                           mike_files=mike_files)
+    return render_template("gallery.html")
 
 
 @app.route("/upload/mike/<filename>")
 def mike_image(filename):
-    # if current_user.is_authenticated:
-        # user_folder = os.path.join(upload_folder, str(current_user.username))
-        # return send_from_directory(user_folder, filename)
-    # else:
     mike_folder = os.path.join(app.config["UPLOAD_FOLDER"], "mike")
     mike_files = os.listdir(mike_folder)
     return send_from_directory(mike_folder, filename)
