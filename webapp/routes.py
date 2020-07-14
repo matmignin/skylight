@@ -17,7 +17,8 @@ from sqlalchemy.exc import IntegrityError
 from flask_mail import Message
 
 upload_folder = app.config["UPLOAD_FOLDER"]
-
+mat_folder = os.path.join(app.config["UPLOAD_FOLDER"], "mat")
+mike_folder = os.path.join(app.config["UPLOAD_FOLDER"], "mike")
 
 @app.route("/")
 @app.route("/index")
@@ -54,7 +55,7 @@ def login():
         if user:
             if bcrypt.check_password_hash(user.password, form.password.data):
                 login_user(user)
-                # flash(f"{user.username} is logged in!", "success")
+                flash(f"{user.username} is logged in!", "success")
                 return redirect(url_for('upload'))
             else:
                 flash("not a correct password")
@@ -88,8 +89,6 @@ def upload():
                     upload.save(os.path.join(user_folder, upload.filename))
                     flash(f"{upload.filename} uploaded") 
                     msg = Message('test subject', recipients=['mat@mignin.com'])
-                    # msg.body = upload
-                    # msg.html = '<h1>HTML body</h1>'
                     with app.open_resource(os.path.join(user_folder, upload.filename)) as fp:
                         msg.attach(f'{upload.filename}', 'image/*', fp.read())
                     mail.send(msg)
@@ -98,19 +97,40 @@ def upload():
 
 
 @app.route('/gallery', methods=["GET", "POST"])
-def gallery():
-    mat_files = os.listdir(os.path.join(upload_folder, "mat"))
-    mike_files = os.listdir(os.path.join(upload_folder, "mike"))
-    christie_files = os.listdir(os.path.join(upload_folder, "christie"))
-    tony_files = os.listdir(os.path.join(upload_folder, "tony"))
+def get_gallery():
+    mat_folder = os.path.join(app.config["UPLOAD_FOLDER"], "mat")
+    mike_folder = os.path.join(app.config["UPLOAD_FOLDER"], "mike")
+    mat_files = os.listdir(mat_folder)
+    mike_files = os.listdir(mike_folder)
     return render_template("gallery.html",
                            mat_files=mat_files,
-                           mike_files=mike_files,
-                           christie_files=christie_files,
-                           tony_files=tony_files)
+                           mike_files=mike_files)
 
 
-@app.route("/gallery/<filename>")
-def send_image(filename):
-    user_folder = os.path.join(upload_folder, str(current_user.username))
-    return send_from_directory(user_folder, filename)
+@app.route("/upload/mike/<filename>")
+def mike_image(filename):
+    # if current_user.is_authenticated:
+        # user_folder = os.path.join(upload_folder, str(current_user.username))
+        # return send_from_directory(user_folder, filename)
+    # else:
+    mike_folder = os.path.join(app.config["UPLOAD_FOLDER"], "mike")
+    mike_files = os.listdir(mike_folder)
+    return send_from_directory(mike_folder, filename)
+
+@app.route("/upload/mat/<filename>")
+def mat_image(filename):
+    mat_folder = os.path.join(app.config["UPLOAD_FOLDER"], "mat")
+    mat_files = os.listdir(mat_folder)
+    return send_from_directory(mat_folder, filename)
+
+@app.route("/upload/tony/<filename>")
+def tony_image(filename):
+    tony_folder = os.path.join(app.config["UPLOAD_FOLDER"], "tony")
+    tony_files = os.listdir(tony_folder)
+    return send_from_directory(tony_folder, filename)
+
+@app.route("/upload/christie/<filename>")
+def christie_image(filename):
+    christie_folder = os.path.join(app.config["UPLOAD_FOLDER"], "christie")
+    christie_files = os.listdir(christie_folder)
+    return send_from_directory(tony_folder, filename)

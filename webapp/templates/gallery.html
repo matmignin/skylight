@@ -74,11 +74,11 @@
                         <h1 class="text-center" id="gallery_head-3" style="color: #fed875;">Mat &amp; Rachael</h1>
                         <section class="d-flex"><div class="container">
 		<div class="row">
-		{% for file in mat_files %}
+		{% for mat_file in mat_files %}
 			<div class="col-lg-3 col-md-4">
 				<div class="text-center">
 				</div>
-				<img class="img-thumbnail" src="{{ url_for('send_image', filename=file) }}">
+				<img class="img-thumbnail" src="{{ url_for('mat_image', filename=mat_file) }}">
 			</div>
 		{% endfor %}
 		</div>
@@ -89,12 +89,11 @@
                         <h1 class="text-center" id="gallery_head-1" style="color: #fed875;">Mike &amp; Alyssa</h1>
                         <section><div class="container">
 		<div class="row">
-		{% for file in mike_files %}
+		{% for mike_file in mike_files %}
 			<div class="col-lg-3 col-md-4">
 				<div class="text-center">
-					{{ file }}
 				</div>
-				<img class="img-thumbnail" src="{{ url_for('send_image', filename=file) }}">
+				<img class="img-thumbnail" src="{{ url_for('mike_image', filename=mike_file) }}">
 			</div>
 		{% endfor %}
 		</div>
@@ -105,12 +104,11 @@
                         <h1 class="text-center" id="gallery_head" style="color: #fed875;">Christie &amp; Alex</h1>
                         <section><div class="container">
 		<div class="row">
-		{% for file in christie_files %}
+		{% for christie_file in christie_files %}
 			<div class="col-lg-3 col-md-4">
 				<div class="text-center">
-					{{ file }}
 				</div>
-				<img class="img-thumbnail" src="{{ url_for('send_image', filename=file) }}">
+				<img class="img-thumbnail" src="{{ url_for('christie_image', filename=christie_file) }}">
 			</div>
 		{% endfor %}
 		</div>
@@ -121,12 +119,11 @@
                         <h1 class="text-center" id="gallery_head-2" style="color: #fed875;">Tony &amp; Heather</h1>
                         <section><div class="container">
 		<div class="row">
-		{% for file in tony_files %}
+		{% for tony_file in tony_files %}
 			<div class="col-lg-3 col-md-4">
 				<div class="text-center">
-					{{ file }}
 				</div>
-				<img class="img-thumbnail" src="{{ url_for('send_image', filename=file) }}">
+				<img class="img-thumbnail" src="{{ url_for('tony_image', filename=tony_file) }}">
 			</div>
 		{% endfor %}
 		</div>
@@ -146,7 +143,7 @@
         </div>
     </section>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
     <script src="static/js/bs-init.js"></script>
     <script src="static/js/freelancer.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>
