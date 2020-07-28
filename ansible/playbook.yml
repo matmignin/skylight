@@ -48,12 +48,6 @@
         #virtualenv_command: venv
         #virtualenv_site_packages: no
 
-    #- name: Create a directory called images
-      #file: 
-        #path: /usr/share/nginx/html/images 
-        #state: directory 
-        #mode: 0755
-        
         
     - name: Installs Nginx web server
       apt: 
