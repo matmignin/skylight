@@ -2,6 +2,8 @@
 - hosts: all
   become: yes
   become_method: sudo
+
+
   tasks:
     - name: Clone repo
       git:
@@ -9,12 +11,37 @@
         dest: /home/ubuntu/skylight
         accept_hostkey: yes
 
-    - name: pip install requirements.txt
-      pip:
+    - name: Install packages
+      become: true
+      become_method: sudo        
+      apt: update_cache=yes name={{ item }} state=present
+      with_items:
+        - git
+        - python-pip
+        - nginx-full
+        - vim
+        - python-virtualenv
+        - virtualenvwrapper
+        - python3
+        - python3-doc
+        - python3-dev
+        - software-properties-common
+        - python-software-properties
+
+    - name: Install requirements
+      become: true
+      become_method: sudo        
+      pip: 
         requirements: /home/ubuntu/skylight/requirements.txt
         virtualenv: /home/ubuntu/venv
-        virtualenv_command: venv
-        virtualenv_site_packages: no
+        virtualenv_python: python3
+
+    #- name: pip install requirements.txt
+      #pip:
+        #requirements: /home/ubuntu/skylight/requirements.txt
+        #virtualenv: /home/ubuntu/venv
+        #virtualenv_command: venv
+        #virtualenv_site_packages: no
 
     #- name: Create a directory called images
       #file: 
