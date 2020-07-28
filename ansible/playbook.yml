@@ -3,7 +3,21 @@
   become: yes
   become_method: sudo
 
+  vars:
+    packages:
+      - git
+      - python-pip
+      - nginx-full
+      - vim
+      - python-virtualenv
+      - virtualenvwrapper
+      - python3
+      - python3-doc
+      - python3-dev
+      - software-properties-common
+      - python-software-properties
 
+      
   tasks:
     - name: Clone repo
       git:
@@ -14,19 +28,10 @@
     - name: Install packages
       become: true
       become_method: sudo        
-      apt: update_cache=yes name={{ item }} state=present
-      with_items:
-        - git
-        - python-pip
-        - nginx-full
-        - vim
-        - python-virtualenv
-        - virtualenvwrapper
-        - python3
-        - python3-doc
-        - python3-dev
-        - software-properties-common
-        - python-software-properties
+      apt: 
+        update_cache: yes
+        pkg: "{{ packages }}"
+        state: present
 
     - name: Install requirements
       become: true
