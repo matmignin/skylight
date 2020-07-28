@@ -11,9 +11,10 @@
       - vim
       - python-virtualenv
       - virtualenvwrapper
-      - python3
-      - python3-doc
-      - python3-dev
+      - pip3.6
+      - python3.6
+      - python3.6-doc
+      - python3.6-dev
       - software-properties-common
       - python-software-properties
 
@@ -33,13 +34,13 @@
         pkg: "{{ packages }}"
         state: present
 
-    - name: Install requirements
+    - name: Install pip requirements
       become: true
       become_method: sudo        
       pip: 
         requirements: /home/ubuntu/skylight/requirements.txt
-        virtualenv: /home/ubuntu/venv
-        virtualenv_python: python3
+        virtualenv: /home/venv
+        #virtualenv_python: python3
 
     #- name: pip install requirements.txt
       #pip:
