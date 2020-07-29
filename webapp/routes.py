@@ -36,7 +36,7 @@ def signup():
         db.session.add(user)
         try:
             db.session.commit()
-            flash(f"account created for {form.username.data}!", "success")
+            flash("account created for {0}!".format(form.username.data), "success")
             return redirect(url_for("login"))
         except IntegrityError:
             db.session.rollback()
@@ -55,7 +55,7 @@ def login():
         if user:
             if bcrypt.check_password_hash(user.password, form.password.data):
                 login_user(user)
-                flash(f"{user.username} is logged in!", "success")
+                flash("{0} is logged in!".format(user.username), "success")
                 return redirect(url_for('upload'))
             else:
                 flash("not a correct password")
@@ -87,10 +87,10 @@ def upload():
             else:
                 for upload in request.files.getlist("form_upload"):
                     upload.save(os.path.join(user_folder, upload.filename))
-                    flash(f"{upload.filename} uploaded") 
+                    flash("{0} uploaded".format(upload.filename)) 
                     msg = Message('test subject', recipients=['mat@mignin.com'])
                     with app.open_resource(os.path.join(user_folder, upload.filename)) as fp:
-                        msg.attach(f'{upload.filename}', 'image/*', fp.read())
+                        msg.attach('{0}'.format.(upload.filename), 'image/*', fp.read())
                     mail.send(msg)
     files = os.listdir(user_folder)
     return render_template("upload.html", files=files)
