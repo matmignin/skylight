@@ -26,10 +26,10 @@
         accept_hostkey: yes
 
     - name: Install packages
-      become: true
-      become_method: sudo        
-      update_cache: yes
-      force_apt_get: yes
+      #become: yes
+      #become_method: sudo        
+      #update_cache: yes
+      #force_apt_get: yes
       apt: 
         pkg: "{{ packages }}"
         state: present
@@ -40,7 +40,8 @@
       pip: 
         requirements: /home/ubuntu/skylight/requirements.txt
         virtualenv: /home/venv
-        virtualenv_python: python3
+        virtualenv_command: venv
+        #virtualenv site_packages: no
 
     #- name: pip install requirements.txt
       #pip:
