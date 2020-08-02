@@ -11,10 +11,9 @@
       - vim
       - python-virtualenv
       - virtualenvwrapper
-      - pip3.6
-      - python3.6
-      - python3.6-doc
-      - python3.6-dev
+      - python3
+      - python3-doc
+      - python3-dev
       - software-properties-common
       - python-software-properties
 
@@ -29,8 +28,9 @@
     - name: Install packages
       become: true
       become_method: sudo        
+      update_cache: yes
+      force_apt_get: yes
       apt: 
-        update_cache: yes
         pkg: "{{ packages }}"
         state: present
 
@@ -40,7 +40,7 @@
       pip: 
         requirements: /home/ubuntu/skylight/requirements.txt
         virtualenv: /home/venv
-        #virtualenv_python: python3
+        virtualenv_python: python3
 
     #- name: pip install requirements.txt
       #pip:
