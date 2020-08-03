@@ -98,29 +98,48 @@ def upload():
 
 @app.route('/gallery', methods=["GET", "POST"])
 def get_gallery():
-    return render_template("gallery.html")
+    mat_folder = os.path.join(app.config["UPLOAD_FOLDER"], "mat")
+    mat_files = os.listdir(mat_folder)
+    mike_folder = os.path.join(app.config["UPLOAD_FOLDER"], "mike")
+    mike_files = os.listdir(mike_folder)
+    tony_folder = os.path.join(app.config["UPLOAD_FOLDER"], "tony")
+    tony_files = os.listdir(tony_folder)
+    christie_folder = os.path.join(app.config["UPLOAD_FOLDER"], "christie")
+    christie_files = os.listdir(christie_folder)
+    return render_template("gallery.html", mat_files=mat_files, mike_files=mike_files, tony_files=tony_files, christie_files=christie_files)
+
+
+
+@app.route("/upload/mat/<filename>")
+def mat_image(filename):
+    mat_folder = os.path.join(app.config["UPLOAD_FOLDER"], "mat")
+    # mat_files = os.listdir(mat_folder)
+    return send_from_directory(mat_folder, filename)
 
 
 @app.route("/upload/mike/<filename>")
 def mike_image(filename):
     mike_folder = os.path.join(app.config["UPLOAD_FOLDER"], "mike")
-    mike_files = os.listdir(mike_folder)
+    # mike_files = os.listdir(mike_folder)
     return send_from_directory(mike_folder, filename)
 
-@app.route("/upload/mat/<filename>")
-def mat_image(filename):
-    mat_folder = os.path.join(app.config["UPLOAD_FOLDER"], "mat")
-    mat_files = os.listdir(mat_folder)
-    return send_from_directory(mat_folder, filename)
 
 @app.route("/upload/tony/<filename>")
 def tony_image(filename):
     tony_folder = os.path.join(app.config["UPLOAD_FOLDER"], "tony")
-    tony_files = os.listdir(tony_folder)
+    # tony_files = os.listdir(tony_folder)
     return send_from_directory(tony_folder, filename)
+
 
 @app.route("/upload/christie/<filename>")
 def christie_image(filename):
     christie_folder = os.path.join(app.config["UPLOAD_FOLDER"], "christie")
-    christie_files = os.listdir(christie_folder)
-    return send_from_directory(tony_folder, filename)
+    # christie_files = os.listdir(christie_folder)
+    return send_from_directory(christie_folder, filename)
+
+
+@app.route("/upload/<filename>")
+def all_image(filename):
+    # all_folder = app.config["UPLOAD_FOLDER"]
+    # all_files = os.listdir(r)
+    return send_from_directory(upload_folder, filename)

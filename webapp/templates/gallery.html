@@ -76,8 +76,6 @@
 		<div class="row">
 		{% for mat_file in mat_files %}
 			<div class="col-lg-3 col-md-4">
-				<div class="text-center">
-				</div>
 				<img class="img-thumbnail" src="{{ url_for('mat_image', filename=mat_file) }}">
 			</div>
 		{% endfor %}

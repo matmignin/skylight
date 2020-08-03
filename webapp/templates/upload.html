@@ -78,14 +78,35 @@
 </div>
 <div class="container">
 		<div class="row">
+     {% if current_user.username == "mat" %}
 		{% for file in files %}
 			<div class="col-lg-3 col-md-4">
-				<div class="text-center">
-					{{ file }}
-				</div>
-				<img class="img-thumbnail" src="{{url_for('send_image', filename=file)}}">
+                <img class="img-thumbnail" src="{{url_for('mat_image', filename=file)}}">
 			</div>
 		{% endfor %}
+     {% elif current_user.username == "mike" %}
+		{% for file in files %}
+			<div class="col-lg-3 col-md-4">
+                <img class="img-thumbnail" src="{{url_for('mike_image', filename=file)}}">
+			</div>
+		{% endfor %}
+     {% elif current_user.username == "tony" %}
+        {% for file in files %}
+            <div class="col-lg-3 col-md-4">
+                <img class="img-thumbnail" src="{{url_for('tony_image', filename=file)}}">
+            </div>
+        {% endfor %}
+     {% elif current_user.username == "christie" %}
+        {% for file in files %}
+            <div class="col-lg-3 col-md-4">
+                <img class="img-thumbnail" src="{{url_for('christie_image', filename=file)}}">
+            </div>
+        {% endfor %}
+     {% else %}
+            <div class="col-lg-3 col-md-4">
+                <h1 class="text-uppercase"> {{ current_user.username }}'s Photos</h1>
+            </div>
+     {% endif %}
 		</div>
 </div>
 </div>
