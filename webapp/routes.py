@@ -91,7 +91,7 @@ def upload():
                     msg = Message('test subject', recipients=['mat@mignin.com'])
                     with app.open_resource(os.path.join(user_folder, upload.filename)) as fp:
                         msg.attach('{0}'.format(upload.filename), 'image/*', fp.read())
-                    mail.send(msg)
+                        mail.send(msg)
     files = os.listdir(user_folder)
     return render_template("upload.html", files=files)
 
@@ -106,7 +106,12 @@ def get_gallery():
     tony_files = os.listdir(tony_folder)
     christie_folder = os.path.join(app.config["UPLOAD_FOLDER"], "christie")
     christie_files = os.listdir(christie_folder)
-    return render_template("gallery.html", mat_files=mat_files, mike_files=mike_files, tony_files=tony_files, christie_files=christie_files)
+    return render_template("gallery.html", 
+                           mat_files=mat_files,
+                           mike_files=mike_files,
+                           tony_files=tony_files,
+                           christie_files=christie_files)
+
 
 
 

@@ -19,7 +19,7 @@ app.config['MAIL_SERVER'] = 'smtp.googlemail.com'
 app.config['MAIL_USE_TLS'] = 1
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USERNAME'] = 'mathough2@gmail.com'
-app.config['MAIL_PASSWORD'] = 'Xpw8lW4188Mm'
+app.config['MAIL_PASSWORD'] = 
 app.config['MAIL_DEFAULT_SENDER'] = 'mathough2@gmail.com'
 
 

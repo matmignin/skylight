@@ -3,7 +3,7 @@
 #}
 
 variable "private_key" {
-  default = "skylight"
+  default = "skylight2"
 }
 
 variable "ami_id" {

@@ -1,6 +1,7 @@
 provider "aws" {
   profile = "default"
   region  = var.region
+
 }
 
 
@@ -12,8 +13,9 @@ resource "aws_instance" "skylight_instance" {
 
   provisioner "remote-exec" {
     inline = [
-      "sudo apt-get -y update && sudo apt-get -y upgrade",
-      "sudo apt-get install -y python3 python3-venv",
+      "sudo apt -y update && sudo apt -y upgrade",
+      "sudo apt install -y python3 python3-venv python3-pip",
+      "sudo pip3 install --upgrade pip",
       "python3 -m venv venv"
     ]
     connection {
@@ -38,6 +40,13 @@ resource "aws_security_group" "skylight_sg" {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port   = 8080
+    to_port     = 8080
+    protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
 

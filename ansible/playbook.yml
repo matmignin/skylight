@@ -26,11 +26,8 @@
         accept_hostkey: yes
 
     - name: Install packages
-      #become: yes
-      #become_method: sudo        
-      #update_cache: yes
-      #force_apt_get: yes
       apt: 
+        update_cache: true
         pkg: "{{ packages }}"
         state: present
 
@@ -39,18 +36,11 @@
       become_method: sudo        
       pip: 
         requirements: /home/ubuntu/skylight/requirements.txt
-        virtualenv: /home/venv
-        virtualenv_command: venv
-        #virtualenv site_packages: no
+        virtualenv: /home/ubuntu/venv
+        virtualenv_command: virtualenv
+        virtualenv_python: python3
+        virtualenv site_packages: yes
 
-    #- name: pip install requirements.txt
-      #pip:
-        #requirements: /home/ubuntu/skylight/requirements.txt
-        #virtualenv: /home/ubuntu/venv
-        #virtualenv_command: venv
-        #virtualenv_site_packages: no
-
-        
     - name: Installs Nginx web server
       apt: 
         pkg: nginx 
@@ -86,12 +76,6 @@
       service: 
         name: nginx 
         state: restarted
-
-    #- name: Create a directory called images
-      #file: 
-        #path: /usr/share/nginx/html/images 
-        #state: directory 
-        #mode: 0755
 
   handlers:
     - name: start Nginx

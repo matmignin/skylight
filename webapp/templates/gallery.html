@@ -104,8 +104,6 @@
 		<div class="row">
 		{% for christie_file in christie_files %}
 			<div class="col-lg-3 col-md-4">
-				<div class="text-center">
-				</div>
 				<img class="img-thumbnail" src="{{ url_for('christie_image', filename=christie_file) }}">
 			</div>
 		{% endfor %}
@@ -119,8 +117,6 @@
 		<div class="row">
 		{% for tony_file in tony_files %}
 			<div class="col-lg-3 col-md-4">
-				<div class="text-center">
-				</div>
 				<img class="img-thumbnail" src="{{ url_for('tony_image', filename=tony_file) }}">
 			</div>
 		{% endfor %}
