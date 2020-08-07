@@ -1,5 +1,4 @@
 #variable "public_key_path" {
-#default = "us-east-1"
 #}
 
 variable "private_key" {

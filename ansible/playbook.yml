@@ -36,10 +36,11 @@
       become_method: sudo        
       pip: 
         requirements: /home/ubuntu/skylight/requirements.txt
-        virtualenv: /home/ubuntu/venv
-        virtualenv_command: virtualenv
-        virtualenv_python: python3
-        virtualenv site_packages: yes
+        #virtualenv: /home/ubuntu/venv
+        #virtualenv_command: venv
+        #virtualenv_python: python3
+        #virtualenv site_packages: yes
+        executable: pip3
 
     - name: Installs Nginx web server
       apt: 
@@ -76,9 +77,16 @@
       service: 
         name: nginx 
         state: restarted
+      notify:
+        - reboot System
 
   handlers:
     - name: start Nginx
       service:
         name: nginx 
         state: restarted
+
+    - name: reboot System
+      reboot:
+        reboot_timeout: 3600
+
