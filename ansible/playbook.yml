@@ -6,7 +6,7 @@
   vars:
     packages:
       - git
-      - python-pip
+      - python3-pip
       - nginx-full
       - vim
       - python-virtualenv
@@ -16,7 +16,6 @@
       - python3-dev
       - software-properties-common
       - python-software-properties
-
       
   tasks:
     - name: Clone repo
@@ -36,11 +35,9 @@
       become_method: sudo        
       pip: 
         requirements: /home/ubuntu/skylight/requirements.txt
-        #virtualenv: /home/ubuntu/venv
-        #virtualenv_command: venv
+        virtualenv: /home/ubuntu/skylight/venv
+        virtualenv_command: /usr/bin/python3 -m venv
         #virtualenv_python: python3
-        #virtualenv site_packages: yes
-        executable: pip3
 
     - name: Installs Nginx web server
       apt: 
@@ -73,6 +70,13 @@
         dest: /usr/share/nginx/html/ 
         mode: 0644
         
+    - name: change owner
+      file:
+        state: directory
+        recurse: yes
+        path: /home/ubuntu
+        owner: ubuntu
+
     - name: restart nginx
       service: 
         name: nginx 
@@ -86,7 +90,7 @@
         name: nginx 
         state: restarted
 
-    - name: reboot System
-      reboot:
-        reboot_timeout: 3600
+    #- name: reboot System
+      #reboot:
+        #reboot_timeout: 3600
 

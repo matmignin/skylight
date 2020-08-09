@@ -13,10 +13,11 @@ resource "aws_instance" "skylight_instance" {
 
   provisioner "remote-exec" {
     inline = [
-      "sudo apt -y update && sudo apt -y upgrade",
-      "sudo apt install -y python3 python3-venv python3-pip",
+      #"sudo apt -y update && sudo apt -y upgrade",
+      "sudo apt -y update && sudo apt install -y python3 python3-pip python3-venv",
+      #"sudo apt install -y python3 python3-venv python3-pip",
+      #"python3 -m venv venv",
       "sudo pip3 install --upgrade pip"
-      #"python3 -m venv venv"
     ]
     connection {
       type = "ssh"

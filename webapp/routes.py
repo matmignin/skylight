@@ -88,10 +88,10 @@ def upload():
                 for upload in request.files.getlist("form_upload"):
                     upload.save(os.path.join(user_folder, upload.filename))
                     flash("{0} uploaded".format(upload.filename)) 
-                    msg = Message('test subject', recipients=['mat@mignin.com'])
-                    with app.open_resource(os.path.join(user_folder, upload.filename)) as fp:
-                        msg.attach('{0}'.format(upload.filename), 'image/*', fp.read())
-                        mail.send(msg)
+                    # msg = Message('test subject', recipients=['mat@mignin.com'])
+                    # with app.open_resource(os.path.join(user_folder, upload.filename)) as fp:
+                        # msg.attach('{0}'.format(upload.filename), 'image/*', fp.read())
+                        # mail.send(msg)
     files = os.listdir(user_folder)
     return render_template("upload.html", files=files)
 
