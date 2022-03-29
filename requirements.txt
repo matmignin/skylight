@@ -48,7 +48,7 @@ Mako==1.1.2
 Markdown==3.2.1
 MarkupSafe==1.1.1
 mccabe==0.6.1
-paramiko==2.7.1
+paramiko==2.10.1
 parso==0.7.0
 pexpect==4.8.0
 pickleshare==0.7.5
